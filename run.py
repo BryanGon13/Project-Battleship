@@ -36,7 +36,7 @@ def create_grid(size=5):
     return [[' ' for _ in range(size)] for _ in range(size)]
 
 def print_grid(grid):
-    """Print the game grid with column labels A-E and row labels 1-5."""
+    """Print the game grid with column labels A-E and row labels 1-5, hiding ships."""
     size = len(grid)
     
     # Print column headers (A-E)
@@ -45,12 +45,29 @@ def print_grid(grid):
     
     # Print rows with row numbers (1-5)
     for idx, row in enumerate(grid):
-        row_label = str(idx + 1)  # Convert row number to 1-based index to start at 1 instead of 0
-        row_data = " | ".join(row)
+        row_label = str(idx + 1)  # Convert row number to 1-based index
+        # Replace 'S' with a space ' ' to hide the ships
+        row_data = " | ".join(cell if cell in ['O', 'X'] else ' ' for cell in row)
         print(f"{row_label} | {row_data} |")
         print("  " + "---|---|---|---|---")  # Add a horizontal separator for each row
 
     print()
+
+def place_ships(grid, num_ships=5):
+    """Place ships randomly on the grid."""
+    size = len(grid)
+    ships_placed = 0
+    
+    while ships_placed < num_ships:
+        x = random.randint(0, size - 1)
+        y = random.randint(0, size - 1)
+        
+        # Only place a ship if the cell is empty
+        if grid[x][y] == ' ':
+            grid[x][y] = 'S'  # 'S' represents a ship
+            ships_placed += 1
+
+
 
 
 
