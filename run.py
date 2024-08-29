@@ -77,6 +77,16 @@ def make_guess(grid, x, y):
     else:
         return None  # Already guessed
 
+def get_user_ready():
+    """Prompt the user to start the game."""
+    ready = input("Are you ready to play? (yes/no): ").strip().lower()
+    while ready != 'yes':
+        if ready == 'no':
+            print("Okay, take your time. Type 'yes' when you're ready.")
+        else:
+            print("Invalid input. Please type 'yes' when you're ready to play.")
+        ready = input("Are you ready to play? (yes/no): ").strip().lower()
+
 def play_game():
     """Start and run a single game of Battleships."""
     size = 5
@@ -130,6 +140,9 @@ def play_game():
 def main():
     """Main function to control the flow of the game."""
     print_landing_page()  # Show the landing page
+
+    # Ask user if they are ready to play
+    get_user_ready()
 
     while True:
         play_game()  # Play a single game
