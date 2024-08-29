@@ -1,5 +1,6 @@
 import random
 
+
 def print_centered_boxed_text():
     """Display a boxed, centered welcome message for the Battleships game."""
     print('  =====================================================')
@@ -38,18 +39,19 @@ def print_centered_boxed_text():
     print('  =====================================================')
     print()  # Blank line for spacing
 
+
 def create_grid(size=5):
     """Create a 5x5 grid."""
     return [[' ' for _ in range(size)] for _ in range(size)]
 
+
 def print_grid(grid):
-    """Print the game grid with column labels A-E and row labels 1-5, hiding ships."""
     size = len(grid)
-    
+
     # Print column headers (A-E)
     column_labels = "  " + "   ".join(chr(65 + i) for i in range(size))  # chr(65) is 'A'
     print(column_labels)
-    
+
     # Print rows with row numbers (1-5)
     for idx, row in enumerate(grid):
         row_label = str(idx + 1)  # Convert row number to 1-based index
@@ -60,19 +62,21 @@ def print_grid(grid):
 
     print()
 
+
 def place_ships(grid, num_ships=5):
     """Place ships randomly on the grid."""
     size = len(grid)
     ships_placed = 0
-    
+
     while ships_placed < num_ships:
         x = random.randint(0, size - 1)
         y = random.randint(0, size - 1)
-        
+
         # Only place a ship if the cell is empty
         if grid[x][y] == ' ':
             grid[x][y] = 'S'  # 'S' represents a ship internally
             ships_placed += 1
+
 
 def make_guess(grid, x, y):
     """Process a guess and update the grid."""
@@ -85,6 +89,7 @@ def make_guess(grid, x, y):
     else:
         return None  # Already guessed
 
+
 def get_user_ready():
     """Prompt the user to start the game."""
     ready = input("  =====================================================\n  ==              Are you ready to play?              ==\n  ==                   (yes/no):                     ==\n  =====================================================\n").strip().lower()
@@ -94,6 +99,7 @@ def get_user_ready():
         else:
             print("  =====================================================\n  ==   Invalid input. Please type 'yes' when you're   ==\n  ==                ready to play.                    ==\n  =====================================================")
         ready = input("  =====================================================\n  ==              Are you ready to play?              ==\n  ==                   (yes/no):                     ==\n  =====================================================\n").strip().lower()
+
 
 def play_game():
     """Start and run a single game of Battleships."""
@@ -147,6 +153,7 @@ def play_game():
     if shots_taken >= max_shots:
         print("  =====================================================\n  ==   Game Over! You've used all your shots.         ==\n  =====================================================")
 
+
 def main():
     """Main function to control the flow of the game."""
     print_centered_boxed_text()  # Show the landing page
@@ -162,6 +169,7 @@ def main():
         if play_again != 'yes':
             print("  =====================================================\n  ==       Thank you for playing Battleships!         ==\n  ==                   Goodbye!                      ==\n  =====================================================")
             break  # Exit the game loop if the user doesn't want to play again
+
 
 if __name__ == "__main__":
     main()
